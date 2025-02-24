@@ -8,10 +8,10 @@ import reportRoutes from "./routes/report.routes";
 import cors from "cors";
 
 
-// Cargar variables de entorno
+
 dotenv.config();
 
-// Inicializar Express
+
 const app = express();
 app.use(express.json());
 app.use(cors());

@@ -15,14 +15,9 @@ export class ReservationService {
     const movie = await this.findMovieById(movieId);
     const room = await this.findRoomById(roomId);
     await this.validateSeatsAvailability(roomId, schedule, seats);
-
-    // Crea la reserva
     const reservation = new Reservation({ movieId, roomId, schedule, seats });
     const savedReservation = await reservation.save();
-
-    // Enviar correo de confirmación
     await this.sendConfirmationEmail(savedReservation, movie, room);
-
     return savedReservation;
   }
 

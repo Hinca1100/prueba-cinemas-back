@@ -7,8 +7,8 @@ const movieFacade = new MovieFacade();
 // Obtener todas las películas
 export const getMovies = async (req: Request, res: Response) => {
   try {
-    const movies = await movieFacade.getMovies(); // 🔹 Llama al método correcto de la fachada
-    res.json(movies); // 🔹 Devuelve la lista de películas
+    const movies = await movieFacade.getMovies();
+    res.json(movies);
   } catch (error) {
     console.error("Error en getMovies:", error);
     res.status(500).json({ message: "Error al obtener las películas" });
@@ -18,9 +18,9 @@ export const getMovies = async (req: Request, res: Response) => {
 export const getMoviesId = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const movies =  await movieFacade.getMoviesId(id);
+    const movies = await movieFacade.getMoviesId(id);
     console.log("Obteniendo pelicula en especifico");
-    res.json(movies); // 🔹 Devuelve una pelicula en especifico
+    res.json(movies);
   } catch (error) {
     console.error("Error en getMovies:", error);
     res.status(500).json({ message: "Error al obtener las películas" });
@@ -32,11 +32,16 @@ export const createMovie = async (req: Request, res: Response) => {
   try {
     console.log("Cuerpo recibido en la petición:", req.body);
     const { title, genre, duration, classification } = req.body;
-    const newMovie = await movieFacade.createMovie(title, genre, duration, classification);
+    const newMovie = await movieFacade.createMovie(
+      title,
+      genre,
+      duration,
+      classification
+    );
     await newMovie.save();
     res.status(201).json(newMovie);
   } catch (error) {
-    console.error("Error en createMovie:", error); // 👈 Esto mostrará más detalles en la consola
+    console.error("Error en createMovie:", error);
     res.status(500).json({ message: "Error al crear la película" });
   }
 };
@@ -52,12 +57,14 @@ export const deleteMovie = async (req: Request, res: Response) => {
   }
 };
 
-export const updateMovie = async (req: Request, res: Response): Promise<void> => {
+export const updateMovie = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const { id } = req.params;
     const updateData = req.body;
 
-    // Validar si el ID es un ObjectId válido
     if (!mongoose.Types.ObjectId.isValid(id)) {
       res.status(400).json({ message: "ID inválido" });
       return;

@@ -13,7 +13,7 @@ export const getTotalMovies = async (req: Request, res: Response) => {
   }
 };
 
-// Obtener la cantidad total de salas
+
 export const getTotalRooms = async (req: Request, res: Response) => {
   try {
     const totalRooms = await Room.countDocuments();
@@ -23,7 +23,7 @@ export const getTotalRooms = async (req: Request, res: Response) => {
   }
 };
 
-// Obtener el total de reservas realizadas
+
 export const getTotalReservations = async (req: Request, res: Response) => {
   try {
     const totalReservations = await Reservation.countDocuments();
@@ -33,7 +33,7 @@ export const getTotalReservations = async (req: Request, res: Response) => {
   }
 };
 
-// Obtener todas las reservas con detalles de la película y la sala
+
 export const getReservationsDetail = async (req: Request, res: Response) => {
   try {
     const reservations = await Reservation.find()
