@@ -14,6 +14,10 @@ export class MovieFacade {
     return await newMovie.save();
   }
 
+  async updateMovie(id: string, updateData: any) {
+    return await Movie.findByIdAndUpdate(id, updateData, { new: true });
+  }
+
   async deleteMovie(id: string) {
     return await Movie.findByIdAndDelete(id);
   }
